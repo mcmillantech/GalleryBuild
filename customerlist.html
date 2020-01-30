@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+-------------------------------------------------------------
+Project     Gallery Build
+File        customerlist.html
+            
+Author      John McMillan
+            McMillan Technology 
+
+Shows list of customers, with buttons to create, edit and install
+--------------------------------------------------------------
+-->
+<html>
+    <head>
+        <title>Gallery customers</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="gallery.css">
+        <script>
+        function create() {
+            window.location = "customeraction.php?action=create";
+        }
+       
+        function edit(id) {
+            window.location = "customeraction.php?action=edit&id=" + id;
+        }
+        
+        function install(id) {
+            window.location = "customeraction.php?action=install&id=" + id;
+        }
+        </script>
+    </head>
+
+    <body>
+        <div>
+            <button onclick="create()">New customer</button>
+            <br><br>
+            <h1>Gallery customers</h1>
+            <b>Customer</b><br><br>
+            {list}
+                <span class="cusList1">{name}</span>
+                <button onclick="edit({id})">Edit</button>&nbsp;
+                <button onclick="install({id})">Install</button>&nbsp;
+                <br>
+            {/list}
+        </div>
+    </body>
+</html>

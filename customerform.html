@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+-------------------------------------------------------------
+Project     Gallery Build
+File        customerform.html
+            
+Author      John McMillan
+            McMillan Technology 
+
+Presents the customer edit/ create form
+Called by Customer calss methodsc
+--------------------------------------------------------------
+-->
+<html>
+    <head>
+        <title>Gallery customer</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="gallery.css">
+        <script>
+            function config(cus)
+            {
+                document.location = "customerpost.php?action=configedit&cus=" + cus;
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <h1>Gallery customer</h1>
+            <form name="cusForm" method="post" 
+                  action="customerpost.php?action={action}">
+                <div style="width:600px; float:left">
+                    <span class="prompt">Name</span>
+                    <input type="text" name="name" value="{name}" size="40" /><br>
+                    <span class="prompt">Address</span>
+                    <input type="text" name="addr1" value="{addr1}" size="40" /><br>
+                    <span class="prompt">&nbsp;</span>
+                    <input type="text" name="addr2" value="{addr2}" size="40" /><br>
+                    <span class="prompt">&nbsp;</span>
+                    <input type="text" name="addr3" value="{addr3}" size="40" /><br>
+                    <span class="prompt">&nbsp;</span>
+                    <input type="text" name="addr4" value="{addr4}" size="40" /><br>
+                    <span class="prompt">Post code</span>
+                    <input type="text" name="postcode" value="{postcode}" size="15" /><br>
+                    <span class="prompt">Email</span>
+                    <input type="text" name="email" value="{email}" size="40" /><br><br>
+
+                    <span class="prompt">Style sheet</span>
+                    <input type="text" name="stylesheet" value="{stylesheet}" size="40" /><br>
+                    <span class="prompt">Menus style</span>
+                    <input type="text" name="menustyle" value="{menustyle}" size="40" /><br>
+                    <span class="prompt">Body style</span>
+                    <textarea rows="2" cols="50" name="bodystyle">{bodystyle}</textarea><br>
+                    <span class="prompt">Banner: style</span>
+                    <textarea rows="4" cols="50" name="bannerstyle">{bannerstyle}</textarea><br>
+                    <span class="prompt">&nbsp;&nbsp;&nbsp;&nbsp;content</span>
+                    <textarea rows="4" cols="50" name="bannercontent">{bannercontent}</textarea><br><br>
+                    <span class="prompt">&nbsp;&nbsp;&nbsp;&nbsp;image</span>
+                    <input type="text" name="bannerimage" value="{bannerimage}" size="40" /><br><br>
+                </div>
+                <div style="float:left">
+                    <span class="optionPrompt">Discount vouchers</span>
+                    <input type="checkbox" name="chopt1" {option1} /><br>
+                    <span class="optionPrompt">Collections</span>
+                    <input type="checkbox" name="chopt2" {option2} /><br>
+                    <span class="optionPrompt">Full size view</span>
+                    <input type="checkbox" name="chopt3" {option3} /><br>
+                    <span class="optionPrompt">Shipping rates</span>
+                    <input type="checkbox" name="chopt4" {option4} /><br>
+                    <span class="optionPrompt">Artist details</span>
+                    <input type="checkbox" name="chopt5" {option5} /><br>
+                    <span class="optionPrompt">Links to blog & sm</span>
+                    <input type="checkbox" name="chopt6" {option6} /><br>
+                    <span class="optionPrompt">Exhibitions</span>
+                    <input type="checkbox" name="chopt7" {option7} /><br>
+                    <span class="optionPrompt">Other events</span>
+                    <input type="checkbox" name="chopt8" {option8} /><br>
+                    <span class="optionPrompt">News page</span>
+                    <input type="checkbox" name="chopt9" {option9} /><br>
+                    <span class="optionPrompt">Special cats</span>
+                    <input type="checkbox" name="chopt10" {option10} /><br>
+                </div>
+                <div style="clear: both"></div>
+                <br>
+                
+                <input type="submit" value="Post" name="btnPost" />
+            </form>
+            {configBtn}
+                &nbsp;&nbsp;&nbsp;
+        </div>
+    </body>
+</html>
