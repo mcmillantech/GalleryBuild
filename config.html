@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Gallery Config</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="gallery.css">
+        <style>
+            .head
+            {
+                margin-left:    10px;
+                margin-top:     5px;
+                margin-bottom:  5px;
+                font-size:      110%;
+                font-weight:    bold;
+            }
+            .dbDiv
+            {
+                border: 1px solid;
+                width:      400px;
+                height:     200px;
+                float:      left;
+            }
+            .artistDiv
+            {
+                margin-left: 40px;
+                border:     1px solid;
+                width:      600px;
+                height:     240px;
+                float:      left;
+            }
+            .pathsDiv
+            {
+                border:     1px solid;
+                width:      700px;
+                height:     110px;
+                clear:      both;
+            }
+            .btrDiv
+            {
+                border:     1px solid;
+                width:      1000px;
+                height:     170px;
+            }
+            .btr2
+            {
+                
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Configuration</h2>
+    
+        <form name="cusForm" method="post" 
+            action="customerpost.php?action={action}">
+            <div class="dbDiv">
+                <div class="head">Database<br></div>
+                <span class="prompt">Host</span>
+                <input type="text" name="dbhost" value="{dbhost}" size="30" /><br><br>
+                <span class="prompt">Name</span>
+                <input type="text" name="dbname" value="{dbname}" size="30" /><br><br>
+                <span class="prompt">User</span>
+                <input type="text" name="dbuser" value="{dbuser}" size="30" /><br><br>
+                <span class="prompt">Password</span>
+                <input type="text" name="dbpw" value="{dbpw}" size="30" /><br><br>
+            </div>
+            <div class="artistDiv">
+                <div class="head">Artist details<br></div>
+                <span class="prompt">Name</span>
+                <input type="text" name="artname" value="{artname}" size="40" /><br><br>
+                <span class="prompt">First name</span>
+                <input type="text" name="artfname" value="{artfname}" size="40" /><br><br>
+                <span class="prompt">Address</span>
+                <input type="text" name="artaddr" value="{artaddr}" size="60" /><br><br>
+                <span class="prompt">Email</span>
+                <input type="text" name="artemail" value="{artemail}" size="50" /><br><br>
+                <span class="prompt">Web</span>
+                <input type="text" name="artweb" value="{artweb}" size="50" /><br>
+            </div>
+            <div style="clear: both"><br></div>
+            
+            <div class="pathsDiv">
+                <div class="head">Paths<br></div>
+                <span class="prompt">CkEditor</span>
+                <input type="text" name="ckedit" value="{ckedit}" size="60" /><br><br>
+                <span class="prompt">Braintree</span>
+                <input type="text" name="braintree" value="{braintree}" size="60" /><br><br>
+            </div>
+            <br>
+
+            <div class="btrDiv">
+                <div class="head">Braintree<br></div>
+                <span class="prompt" style="width:530px">Production</span>
+                <span>Sandbox</span><br>
+                <span class="prompt">Merchant ID</span>
+                <input type="text" name="brmerp" value="{brmerp}" size="60" />
+                &nbsp;&nbsp;&nbsp;
+                <input type="text" name="bmers" value="{bmers}" size="60" />
+                <br><br>
+                <span class="prompt">Public key</span>
+                <input type="text" name="brpublicp" value="{brpublicp}" size="60" />
+                &nbsp;&nbsp;&nbsp;
+                <input type="text" name="brpublics" value="{brpublics}" size="60" /><br><br>
+                <span class="prompt">Private key</span>
+                <input type="text" name="brprivatep" value="{brprivatep}" size="60" />
+                &nbsp;&nbsp;&nbsp;
+                <input type="text" name="brprivates" value="{brprivates}" size="60" /><br><br>
+            </div>
+
+            <input type="submit" value="Post">
+        </form>
+</body>
+</html>
