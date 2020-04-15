@@ -250,8 +250,8 @@ class Customer {
         $page->setOptions($this->options);
         $page->go();
 
-        foreach ($xmlPageList as $filename) {
-            $page->build((string)$filename);
+        foreach ($xmlPageList as $filename) {   // Copy or build each page
+            $page->buildPage((string)$filename);
         }
         
         $this->makeCustomStyle();
