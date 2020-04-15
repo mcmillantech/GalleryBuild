@@ -9,11 +9,17 @@
 //
 //  Implements PageBuilder class, used to build each page with options
 //
-//  Call points are setOptions and build, both called by
-//  Customer->install
+//  Call points, all from Customer->install are 
+//              setOptions to set the options string
+//              go which creates the change set
+//              build which builds one page
 // --------------------------------------------------------------
 
+ini_set("display_errors", "1");
+error_reporting(E_ALL);
+
 require_once 'Customer.php';
+require_once 'section.php';
 
 class PageBuilder {
     private $optionString;
@@ -40,17 +46,19 @@ echo "Set page options $param <br>";
     // ---------------------------------------------------------
     // Call point from Customer -> install
     // 
-    // Proceszses options.xml to create changes ordered by page
+    // Processes options.xml to create changes ordered by page
     // -----------------------------------------------------------
     public function go()
     {
         $xml = simplexml_load_file("options.xml");
+                            // Take every XML elemebt option element, split it
+                            // and add the file and option to the changeAt array
         foreach($xml->children() as $option) {
-            $this->processOption($option);
+            $this->processOptionXML($option);
         }
-        $this->changeSet = $this->sortOptions();
-        print_r($this->changeSet);
-      
+        $this->changeSet = $this->sortOptions();    // And now sort to page seq
+//        print_r($this->changeSet);
+//        echo "<br>";
     }
 
     // ---------------------------------------------------------
@@ -60,7 +68,7 @@ echo "Set page options $param <br>";
     // 
     // Updates      changeAr - changes in option sequence
     // ---------------------------------------------------------
-    private function processOption($option)
+    private function processOptionXML($option)
     {
         $id = (int)$option->id;         // Fetch the option id
                                         // Is this option to be used?
@@ -115,37 +123,43 @@ echo "Set page options $param <br>";
     // 
     // Parameter    File name
     // 
+    // Fetches the file level action for the file
+    // If action is remove, do nothing. For default or replace,
+    // pass the source and target files to buildPageOn.
+    // 
     // This can be confusing. The default is the whole package
     // (option flag 1). We have to remove unused options, so
     // only process options where flag is 0
     // ---------------------------------------------------------
-    public function build($name) {
-        $this->name = $name;
+    public function buildPage($page) {
+        $this->name = $page;
+  echo "\n<br>Build $page\n";
         
-        $source = "source/$name";           // Name the source and targets
-        $action = $this->checkForChanges($name);
+        $source = "Source/$page";           // Name the source and targets
+                                            // Checl for an entry in change set
+        $action = $this->checkForChanges($page);
         switch ($action) {                  // Action is file to remove or replace
             case "remove":
-  echo "<br>Procesing $name\n";
   echo "Remove ";
                 return;
             case "":
-                $source = "source/$name";
+                $source = "Source/$page";
                 break;
             default :
                 $source = $this->getReplaceName($action);
-    echo "<br>Procesing $name\n";
+//    echo "<br>Procesing $name\n";
                 echo " Replace with $source ";
                 break;
         }
-        $target = "build/$name";
-        $this->buildFile($source, $target);
+                                        // Now $source is the file to process
+        $target = "build/$page";
+        $this->buildPageOn($source, $target); // ... process and copy
     }
     
     // ----------------------------------------
     // See if there are changes for a file
     // 
-    // Returns the action if so, or blank
+    // Returns the action if so, otherwise blank
     // ----------------------------------------
     public function checkForChanges($file)
     {
@@ -164,60 +178,91 @@ echo "Set page options $param <br>";
     // $stream is the content of the source
     // that has not been processed
     // ----------------------------------------
-    private function buildFile($source, $target)
+    private function buildPageOn($source, $target)
     {
+        echo getcwd();
+        echo " Source $source\n";
         $ar = explode('.', $source);            // Get file type
         if (count($ar) < 2) {                   // Probably a directory
             echo "Error in $source: size wrong<br>";
             return;
         }
+//        print_r($ar);
         $type = $ar[1];
-                                        // Load source file and create target
+                                        // Open source file and create target
         $sFile = @fopen($source, 'r');
         if ($sFile === FALSE) {
             echo "Error $source not found<br>";
             return;
         }
                                         // Read the source file
-        $stream = fread($sFile, filesize($source));
+        $inStream = fread($sFile, filesize($source));
         fclose($sFile);
         $tFile = fopen($target, 'w');
         
-//        echo "$source ";
-        if ($source == "source/topv.html")
-            $stream = $this->makeBanner ($stream);
+        if ($source == "source/topv.html")  // The top file needs the customer banner
+            $inStream = $this->makeBanner ($inStream);
 
-        $pCommand = "";                     // Set the start of token
+        $prefix = "";                       // Set the start of token
         switch($type) {                     // according to file type
             case "php":
-                $Command = "//#";
+                $prefix = "//# ";
                 break;
             case "html":
-                $Command = '<!--#';
+                $prefix = '<!--# ';
                 break;
-            default :
-                echo "Other type $source<br>";
-                fwrite ($tFile, $stream);
+            default :                       // Just copy JS and CSS files
+                echo "Other type $source";
+                fwrite ($tFile, $inStream);
                 fclose($tFile);
                 return;
         } 
 
+        $command = $prefix . "option";      // Search string for commands
+
+        $section = new Section();           // Set up a Section object
+        $section->prefix($prefix);
+        $section->optionString($this->optionString);
+
+        $newStream = $inStream;             // Now loop throught the sections
+        $psn = strpos($newStream, $command);    // Find the firts
+        $firstSec = substr($inStream, 0, $psn); // Output the content before 1st sec
+//        $output = $firstSec;
+        fwrite($tFile, $firstSec);
+
+        do {
+            $newStream = substr($newStream, $psn);
+            $output = $section->processOption($newStream);
+            fwrite($tFile, $output);
+            $psn = $section->end();
+        } while (!$section->eof());
+
+        fclose($tFile);
+        return;
+/*        
+        $sections = explode($Command, $inStream);
+        print_r($sections);
+        foreach ($sections as $str) {
+            $section->set ($str);
+            $fixed = $section->fixedPart();
+//            echo $fixed;
+        }
         $cursor = 0;
                             // Now break the input into sections between commands
-        while ($ptk = strpos($stream, $Command)) {     // Locate next token
+        while ($ptk = strpos($inStream, $Command)) {     // Locate next token
             $length = $ptk - $cursor;           // The length of the section
                                                 // Output the section
-            $section = substr ($stream, $cursor, $length);
+            $section = substr ($inStream, $cursor, $length);
             fwrite($tFile, $section);
             
-            $stream = substr($stream, $length); // Stream is now start of command
-            $cmdLen = $this->processCommand($stream, $Command);
+            $inStream = substr($inStream, $length); // Stream is now start of command
+            $cmdLen = $this->processCommand($inStream, $Command);
             $this->writeOption($tFile);
             
-            $stream = substr($stream, $cmdLen);
+            $inStream = substr($inStream, $cmdLen);
         }
-
-        fwrite ($tFile, $stream);               // Write to end of file
+*/
+        fwrite ($tFile, $inStream);               // Write to end of file
         fclose($tFile);
     }
 
@@ -265,7 +310,7 @@ echo "Set page options $param <br>";
     //              Command, //# or <!--
     //
     //  Sets    optionSet - array
-    //              err
+    //              error flag
     //              option id
     //              content
     //              alt content
@@ -278,7 +323,7 @@ echo "Set page options $param <br>";
         $optionSet['err'] = 1;
                                     // Fetch 1st action - must be 'option'
         $cmd = $this->getCommand($stream, $command);
-//    print_r($cmd);
+    // print_r($cmd);
         $len = $cmd[3];             // This is the end of the action line
         $cmdLen += $len;
 /*        
@@ -287,6 +332,7 @@ echo "Set page options $param <br>";
             return $cmdLen;
         }
 */
+
         if ($cmd[1] != 'option') {
             echo "Error: option command expected $cmd[1] found<br>";
             return $cmdLen;

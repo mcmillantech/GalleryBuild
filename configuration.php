@@ -232,15 +232,16 @@ class Configuration {
         $fhOut = fopen($outFile, "w");
         fwrite($fhOut, $stream);
 
-        $str = "const WEBSITE = \"" . $this->artweb . ";\n";
+        $quot = '"';
+        $str = "const WEBSITE = $quot$this->artweb$quot;\n";
         fwrite ($fhOut, $str);
-        $str = "const USER_EMAIL = \"" . $this->artemail . ";\n";
+        $str = "const USER_EMAIL = $quot$this->artemail$quot;\n";
         fwrite ($fhOut, $str);
-        $str = "const USER_ADDRESS = \"" . $this->artaddr  . ";\n";
+        $str = "const USER_ADDRESS = $quot$this->artaddr$quot;\n";
         fwrite ($fhOut, $str);
-        $str = "const ARTIST = \"" . $this->artname  . ";\n";
+        $str = "const ARTIST = $quot$this->artname$quot;\n";
         fwrite ($fhOut, $str);
-        $str = "const ARTIST_FNAME = \"" . $this->artfname  . ";\n";
+        $str = "const ARTIST_FNAME = $quot$this->artfname$quot;\n";
         fwrite ($fhOut, $str);
 
         fwrite ($fhOut, "\n?>\n");
