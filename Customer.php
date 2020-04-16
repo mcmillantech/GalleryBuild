@@ -34,6 +34,7 @@ class Customer {
     private $bannerimage;
     private $menuStyle;
     private $bodyStyle;
+    private $sourcePath;
 
     // ----------------------------------------
     //  Present form to create a customer
@@ -72,6 +73,15 @@ class Customer {
     public function bodystyle() {
         return $this->bodyStyle;
     }
+    
+    private function makeSourcePath()
+    {
+    //echo "Path " .getcwd();
+        $this->sourcePath = 
+            str_replace("GalleryBuild", "Gallery\\Source\\", getcwd());
+    echo "<br>Cus src $this->sourcePath<br>";
+        
+    }
 
     public function open($id) 
     {
@@ -97,6 +107,8 @@ class Customer {
         $this->bannerimage = $record['bannerimage'];
         $this->menuStyle = $record['menustyle'];
         $this->bodyStyle = $record['bodystyle'];
+        
+        $this->makeSourcePath();
     }
 
 
@@ -251,12 +263,12 @@ class Customer {
         $page->go();
 
         foreach ($xmlPageList as $filename) {   // Copy or build each page
-            $page->buildPage((string)$filename);
+            $page->buildPage((string)$filename, $this->sourcePath);
         }
         
         $this->makeCustomStyle();
         $config = new Configuration;
-        $config->install();
+        $config->install($this->sourcePath);
     }
     
     // ----------------------------------------
@@ -268,7 +280,7 @@ class Customer {
     // ------------------------------------------
     private function makeCustomStyle()
     {
-        $styleFile = "source/css/" . $this->menuStyle;
+        $styleFile = $this->sourcePath . "css/" . $this->menuStyle;
         $fh = fopen($styleFile, "r")
             or die ("Error style file $styleFile not found");
         $stream = fread($fh, filesize($styleFile));

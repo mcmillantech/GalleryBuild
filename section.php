@@ -26,7 +26,6 @@ class Section
     public function optionString($optionString)
     {
         $this->optionString = $optionString;
-echo "Section $this->optionString\n";
     }
     
     public function end()
@@ -38,40 +37,36 @@ echo "Section $this->optionString\n";
     {
         return $this->eof;
     }
-    /*
-    public function set($str)
-    {
-//        echo "Set section --------------\n" . substr($str, 0, 80) . "\n";
-        $this->stream = $str;
-        $endPos = strpos($str, '# end');
-        $this->fixedLen = strpos($str, "\n", $endPos);
-//        $strTr = substr($str, 0, $this->fixedLen -40);
-    }
-*/    
+    
     // ----------------------------------------------
+    // Process an option command
+    // 
     // Parameter    Stream, starting at //# option ..
     // 
+    // Returns      Content to be output
+    // 
+    // Sets         End - pointer to end of the section
+    //              eof - TRUE at end of file
     // ----------------------------------------------
     public function processOption($stream)
     {
-    echo "\nProcess ";
-    echo mySubstr($stream, 0, 70);
+//    echo "\nProcess ";
+//    echo mySubstr($stream, 0, 70);
         $part2 = "";                                    // For the alt content
         
                                         // Extract the number of the option
         $command = mySubstr($stream, $this->pfixLen + 7, 20);
         sscanf ($command, "%d ", $option);
-//        echo "opt $option ";
 
         $pt1 = strpos($stream, "\n") + 1;         // Start of default stream
                                                         // i.e. end of cmd line
         $pt1n = strpos($stream, $this->prefix, $pt1);   // End of default stream
         $part1 = mySubstr($stream, $pt1, $pt1n);        // Content of default stream
-       echo "\nPt 1 $pt1,  $pt1n: $part1";
+//       echo "\nPt 1 $pt1,  $pt1n: $part1";
         
         $pt2 = $pt1n + $this->pfixLen;                  // Start of next command
         $action = substr($stream, $pt2, 3);
-    echo "Cmd $action\n";
+//    echo "Cmd $action\n";
         if ($action == 'alt') {                         // Start, end and content of alt stream
             $pt3 = strpos($stream, "\n", $pt2) + 1;
             $pt3n = strpos($stream, $this->prefix, $pt3);
@@ -87,21 +82,19 @@ echo "Section $this->optionString\n";
         if ($this->ptEnd === FALSE) {
             $this->eof = TRUE;
             $this->ptEnd = strlen($stream);
-            echo "End of file $this->ptEnd \n";
+//            echo "End of file $this->ptEnd \n";
         }
+                                    // Point to the fixed content after #end
         $fixed = mySubstr($stream, $pt4, $this->ptEnd);
 
         $useThis = $this->checkOption($option);
-echo "Option $option $useThis\n";
         if ($useThis == 1) {
             $vbl = $part1;
         }
         else
             $vbl = $part2;
             
-        echo "\n ---------done\n";
         return $vbl . $fixed;
-        
     }
 
     public function fixedPart()
@@ -115,6 +108,10 @@ echo "Option $option $useThis\n";
     
 }
 
+// ----------------------------------------------
+// Return a substring defined by start and end
+// 
+// ----------------------------------------------
 function mySubstr($str, $start, $end)
     {
         $len = $end - $start;

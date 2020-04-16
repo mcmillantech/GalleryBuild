@@ -81,36 +81,16 @@ class Configuration {
     {
         $mysqli = dbConnect();
 
-//	$dta = $_GET;
         $cusId = $mysqli->insert_id;
         $cusId =1;
         
-/*	$dbhost = addslashes($dta['dbhost']);
-	$dbname = addslashes($dta['dbname']);
-	$dbuser = addslashes($dta['dbuser']);
-	$dbpw = addslashes($dta['dbpw']);
-	$artname = addslashes($dta['artname']);
-	$artfname = addslashes($dta['artfname']);
-	$artaddr = addslashes($dta['artaddr']);
-	$artemail = addslashes($dta['artemail']);
-	$artweb = addslashes($dta['artweb']);
-	$ckedit = addslashes($dta['ckedit']);
-	$braintree = addslashes($dta['braintree']);
-	$brmerp = addslashes($dta['brmerp']);
-	$bmers = addslashes($dta['bmers']);
-	$brpublicp = addslashes($dta['brpublicp']);
-	$brpublics = addslashes($dta['brpublics']);
-	$brprivatep = addslashes($dta['brprivatep']);
-	$brprivates = addslashes($dta['brprivates']);
- 
- */
 	$sql = "INSERT into config ("
 	 . "customer,dbhost,dbname,dbuser,dbpw,artname,artfname,artaddr,artemail,artweb,"
           . "ckedit,braintree,brmerp,bmers,brpublicp,brpublics,brprivatep,brprivates"
 	 . ") VALUES ("
 	 . "$cusId, '$this->dbhost','$this->dbname','$this->dbuser','$this->dbpw','$this->artname','$this->artfname','$this->artaddr','$this->artemail','$this->artweb','$this->ckedit','$this->braintree','$this->brmerp','$this->bmers','$this->brpublicp','$this->brpublics','$this->brprivatep','$this->brprivates'"
 	 . ")";
-//echo "\n$sql\n";
+
 	$mysqli->query($sql)
             or die("Failed to insert record : " . $mysqli->error);
     }
@@ -206,23 +186,23 @@ class Configuration {
     // 
     // Common.php, config.txt, bootstrap.php
     // ----------------------------------------
-    function install()
+    function install($sourcePath)
     {
         $this->fetch();
-        $this->makeCommon();
+        $this->makeCommon($sourcePath);
         $this->makeConfig();
-        $this->makeBootstrap();
+        $this->makeBootstrap($sourcePath);
     }
     
     // ----------------------------------------
     // Build common.php
     // 
     // ----------------------------------------
-    function makeCommon()
+    function makeCommon($sourcePath)
     {
-        $inFile = "source/common.php";
+        $inFile = $sourcePath . "common.php";
         $fh = fopen($inFile, "r")
-            or die ("Error source/common.php not found");
+            or die ("Error $inFile not found");
         $stream = fread($fh, filesize($inFile));
         fclose($fh);
         
@@ -254,27 +234,29 @@ class Configuration {
     // ----------------------------------------
     function makeConfig()
     {
-        $outFile = "build/config.txt";
+        
+        $content = "dbhost\t\t$this->dbhost\n";
+        $content .= "dbhost\t\t$this->dbhost\n"; 
+        $content .= "dbname\t\t$this->dbname\n";
+        $content .= "dbuser\t\t$this->dbuser\n";
+        $content .= "dbpw\t\t$this->dbpw\n";
+        
+        $content .= "images\t\timages\n";
+        $content .= "braintree\t$this->braintree\n";
+        $content .= "ckeditor\t$this->ckedit\n";
+
+        $outFile = "build/config.txt";      // Write to main folder
         if (file_exists($outFile))
             unlink ($outFile);
         $fhOut = fopen($outFile, "w");
-        
-        $str = "dbhost\t\t$this->dbhost\n"; 
-        fwrite ($fhOut, $str);
-        $str = "dbname\t\t$this->dbname\n";
-        fwrite ($fhOut, $str);
-        $str = "dbuser\t\t$this->dbuser\n";
-        fwrite ($fhOut, $str);
-        $str = "dbpw\t\t$this->dbpw\n";
-        fwrite ($fhOut, $str);
-        
-        $str = "images\t\timages\n";
-        fwrite ($fhOut, $str);
-        $str = "braintree\t$this->braintree\n";
-        fwrite ($fhOut, $str);
-        $str = "ckeditor\t$this->ckedit\n";
-        fwrite ($fhOut, $str);
+        fwrite ($fhOut, $content);
+        fclose ($fhOut);
 
+        $outFile = "build/admin/config.txt";    // And copy to admin
+        if (file_exists($outFile))
+            unlink ($outFile);
+        $fhOut = fopen($outFile, "w");
+        fwrite ($fhOut, $content);
         fclose ($fhOut);
     }
 
@@ -282,11 +264,11 @@ class Configuration {
     // Make Braintree bootstrap.php
     // 
     // ----------------------------------------
-    function makeBootstrap()
+    function makeBootstrap($sourcePath)
     {
-        $inFile = "source/bootstrap.php";
+        $inFile = $sourcePath . "bootstrap.php";
         $fh = fopen($inFile, "r")
-            or die ("Error source/bootstrap.php not found");
+            or die ("Error $inFile not found");
         $stream = fread($fh, filesize($inFile));
         fclose($fh);
         

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<optionSet>
+
+    <option>
+        <name>Discount voucher</name>
+        <id>1</id>
+        <price>35.00</price>
+        <changes>
+            <page>
+                <file>ajaxvoucher.php</file>
+                <action>remove</action>
+            </page>
+            <page>
+                <file>order.php</file>
+                <change>#2-1</change>
+            </page>
+            <page>
+                <file>admin/adminmenus.php</file>
+            </page>
+            <page>
+                <file>admin/voucheredit.php</file>
+                <action>remove</action>
+            </page>
+            <page>
+                <file>admin/voucherlist.php</file>
+                <action>remove</action>
+            </page>
+        </changes>
+    </option>
+	
+    <option>
+        <name>Collections</name>
+        <id>2</id>
+        <price>35.00</price>
+        <changes>
+            <page>
+                <file>collections.php</file>
+                <action>remove</action>
+            </page>
+            <page>
+                <file>index.php</file>
+                <action>replace replace/indexnc.php</action>
+            </page>
+            <page>
+                <file>indexv.html</file>
+                <action>replace replace/index2.html</action>
+            </page>
+            <page>
+                <file>collections.html</file>
+                <action>remove</action>
+            </page>
+            <page>
+                <file>admin/adminmenus.php</file>
+            </page>
+        </changes>
+    </option>
+    <option>
+        <name>Expand picture</name>
+        <id>3</id>
+        <price>35.00</price>
+        <changes>
+            <page>
+                <file>enlarge.php</file>
+                <action>remove</action>
+            </page>
+        </changes>
+    </option>
+    <option>
+        <name>Shipping rates</name>
+        <id>4</id>
+        <price>30</price>
+        <changes>
+            <page>
+                <file>admin/shiplist.php</file>
+                <action>remove</action>
+            </page>
+        </changes>
+    </option>
+    <option>
+        <name>Artist details</name>
+        <id>5</id>
+        <price>30</price>
+        <changes>
+            <page>
+                <file>about.php</file>
+                <action>remove</action>
+            </page>
+            <page>
+                <file>about.html</file>
+                <action>remove</action>
+            </page>
+        </changes>
+    </option>
+
+</optionSet>
