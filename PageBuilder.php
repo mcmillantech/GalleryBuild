@@ -177,15 +177,12 @@ echo "Set page options $param <br>";
     // $stream is the content of the source
     // that has not been processed
     // ----------------------------------------
-    private function buildPageOn($source, $target, $sourcePath)
+    private function buildPageOn($src, $target, $sourcePath)
     {
-    //echo "Path " .getcwd();
-    //    $sourcePath = str_replace("GalleryBuild", "Gallery\\Source\\", getcwd());
-    //echo "<br>src $sourcePath<br>";
-        $source = $sourcePath . $source;
-        echo "<br>Source $source\n";
+        $source = $sourcePath . $src;
+//        echo "<br>Source $source\n";
     
-        $ar = explode('.', $source);            // Get file type
+        $ar = explode('.', $src);            // Get file type
         if (count($ar) < 2) {                   // Probably a directory
             echo "Error in $source: size wrong<br>";
             return;
@@ -202,7 +199,7 @@ echo "Set page options $param <br>";
         fclose($sFile);
         $tFile = fopen($target, 'w');
         
-        if ($source == "source/topv.html")  // The top file needs the customer banner
+        if ($src == "topv.html")  // The top file needs the customer banner
             $inStream = $this->makeBanner ($inStream);
 
         $prefix = "";                       // Set the start of token
@@ -258,8 +255,10 @@ echo "Set page options $param <br>";
     {
         $BANNER = "<!--# banner -->";
         
-        if (strpos($stream, $BANNER) === FALSE)
+        if (strpos($stream, $BANNER) === FALSE) {
+            echo "No banner<br>";
             return $stream;
+        }
 
         $content = $this->customer->bannercontent();
 
