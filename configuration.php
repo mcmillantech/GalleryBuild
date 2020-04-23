@@ -200,7 +200,7 @@ class Configuration {
     // ----------------------------------------
     function makeCommon($sourcePath)
     {
-        $inFile = $sourcePath . "common.php";
+        $inFile = $sourcePath . "commonMaster.php";
         $fh = fopen($inFile, "r")
             or die ("Error $inFile not found");
         $stream = fread($fh, filesize($inFile));
