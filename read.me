@@ -1,0 +1,34 @@
+Build process
+=============
+Pages
+-----
+Index.php - home page, shows list using customerList.html.
+    Calls customeraction to edit and install.
+Customer.php implements the Customer class, performs edit and does the install.
+PageBuilder performs the actual build.
+    The go method runs a complex proeess to read options.xml and build an array,
+    changeSet holding the changes in page sequence.
+Process
+-------
+Runs from customeraction.php, called by buttons in index.php
+Then calls Customer->install()
+    That creates a PageBuilder and calls for each page.
+    Also creates a Configuration object and builds the config and styles.
+PageBuilder
+    buildPage fetches the pages, ignores removals and substitutes changes.
+    buildPageOn checks the file types and sets the command prefix (comment + #)
+    It copies the source file to the target, breaking into section starting
+    with commands, creating a Section object for each and calling the Section
+    processOption method.
+Section
+    The Section class extracts a section between the starts of 2 commands. It
+    holds data within properties, these can be accessed by the caller.
+    processOption takes the input stream, from the end of the last section to
+    the end of file. It extracts the option and, if present, the alt commands.
+    It creates pointers: pt1 - start of default HTML or PHP; pt1n - end of same;
+    pt2 - start of next command (may be alt); pt3 - start of alt text; pt3n -
+    end of same; finally pt4 - start of next section.
+    Part1 is set to the default text, part2 to the alt. Finally, it checks the 
+    customer's option set to decide which part, if any, to be output.
+
+
