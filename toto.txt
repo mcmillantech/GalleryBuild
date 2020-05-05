@@ -1,0 +1,32 @@
+To Do
+=====
+Remove Recent & events menus - resore About
+Check options list - have I done them all - see options.xml
+Remove piclist collections for option 11 - set col to the user - / done
+Collection needs edit for artist details
+Superadmin needs access to all collections and home page data
+Index2.html image is hard coded - check operation of config
+    aboutedit.php to have image selection
+    Probable database change
+Look into password encryption
+Payment option needed
+Topv.html option 5 reads "About Lupe"
+
+Install
+-------
+Database creation SQL - to GIT
+
+Builder
+-------
+Banner image & text
+User levels to be 2 & 3 - /
+CSS files needed - styles banner & menu -/ 
+Bug in admin menus
+Too much output /
+Report indexv.html not found - / in buildPage, remove the tail from command
+Report on page removed  - / caused by default in PageBuilder buildPage
+No style sheet selected causes problem - / Check on blank
+Wrong customer seems to be updated - / id added to form
+Number of options to be a constant
+    OK in Customer.php
+
