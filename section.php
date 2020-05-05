@@ -88,6 +88,7 @@ class Section
         $fixed = mySubstr($stream, $pt4, $this->ptEnd);
 
         $useThis = $this->checkOption($option);
+//        echo "Use $useThis, pt2 $part2<br>";
         if ($useThis == 1) {
             $vbl = $part1;
         }

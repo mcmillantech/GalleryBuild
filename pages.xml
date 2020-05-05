@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageset>
-    <file>AjaxLogOn.php</file>
     <file>Gallery.css</file>
     <file>Cunha.js</file>
     <file>Menus.css</file>
@@ -34,7 +33,7 @@
     <file>admin/AjaxLogOn.php</file>
     <file>admin/DataEdit.php</file>
     <file>admin/DataList.php</file>
-    <file>admin/Logon.php</file>
+    <file>admin/logon.php</file>
     <file>admin/aboutedit.php</file>
     <file>admin/adminmenus.php</file>
     <file>admin/coledit.php</file>
@@ -47,7 +46,7 @@
     <file>admin/futureeventlist.php</file>
     <file>admin/imageframe.html</file>
     <file>admin/index.php</file>
-    <file>admin/logon.html</file>
+    <file>admin/logon.php</file>
     <file>admin/logout.php</file>
     <file>admin/orders.php</file>
     <file>admin/picedit.php</file>
@@ -64,4 +63,5 @@
     <file>admin/voucheredit.php</file>
     <file>admin/voucherlist.php</file>
     <file>admin/vouchertlist.php</file>
+    <file>admin/artgroup.php</file>
 </pageset>

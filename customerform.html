@@ -28,7 +28,7 @@ Called by Customer calss methodsc
         <div>
             <h1>Gallery customer</h1>
             <form name="cusForm" method="post" 
-                  action="customerpost.php?action={action}">
+                  action="customerpost.php?id={id}&action={action}">
                 <div style="width:600px; float:left">
                     <span class="prompt">Name</span>
                     <input type="text" name="name" value="{name}" size="40" /><br>
@@ -79,6 +79,8 @@ Called by Customer calss methodsc
                     <input type="checkbox" name="chopt9" {option9} /><br>
                     <span class="optionPrompt">Special cats</span>
                     <input type="checkbox" name="chopt10" {option10} /><br>
+                    <span class="optionPrompt">Group build</span>
+                    <input type="checkbox" name="chopt11" {option11} /><br>
                 </div>
                 <div style="clear: both"></div>
                 <br>
