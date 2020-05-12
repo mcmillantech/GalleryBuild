@@ -267,7 +267,11 @@ echo "Set page options $param <br>";
             return $stream;
         }
 
-        $content = $this->customer->bannercontent();
+        $image = '{impath}/' . $this->customer->bannerimage();
+        $content = "<img src='$image' style='width:100%; height:300px'>";
+        $content .= "<div id='bannerContent'>";
+        $content .= $this->customer->bannercontent();
+        $content .= "</div>";
 
         return str_replace($BANNER, $content, $stream);
     }

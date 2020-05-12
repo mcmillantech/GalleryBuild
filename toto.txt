@@ -1,32 +1,37 @@
 To Do
 =====
-Remove Recent & events menus - resore About
+Image upload error / - fixed with case of image file?
+ Undefined index: artist in \www\GalleryBuild\build\admin\artgroup.php on line 39
+ piclist.php:324
+
+Public home page - indexv needs the image from config / -
+Lupe wants hover image to change
+Allow upload of artist picture - to images, not small
+
 Check options list - have I done them all - see options.xml
-Remove piclist collections for option 11 - set col to the user - / done
-Collection needs edit for artist details
-Superadmin needs access to all collections and home page data
-Index2.html image is hard coded - check operation of config
-    aboutedit.php to have image selection
-    Probable database change
-Look into password encryption
 Payment option needed
 Topv.html option 5 reads "About Lupe"
-
-Install
--------
-Database creation SQL - to GIT
+Use imgpath for all paths in admin
+Look into password encryption
 
 Builder
 -------
-Banner image & text
-User levels to be 2 & 3 - /
-CSS files needed - styles banner & menu -/ 
-Bug in admin menus
-Too much output /
-Report indexv.html not found - / in buildPage, remove the tail from command
-Report on page removed  - / caused by default in PageBuilder buildPage
-No style sheet selected causes problem - / Check on blank
-Wrong customer seems to be updated - / id added to form
+Need an option to rebuild config only
 Number of options to be a constant
     OK in Customer.php
 
+Done
+----
+Upload Braintree /
+Bug setting config in Builder / -
+Heading to read New art For You / - May need modifying later
+Align banner text on tablet / -
+Admin needs setting of home image / -
+Collection needs edit for artist details / - Already there
+    aboutedit.php to have image selection / -
+Sort the Braintree data / - in New Art condig (also Lupe folder)
+Store the creation SQL / In Build repo
+Sort what I changed Wednesday with the top files / - all main menus set in topv.html
+Database creation SQL - to GIT / -
+Customer post overwrites all config files / - 
+Admin has lost styles / -

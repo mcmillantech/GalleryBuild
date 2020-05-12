@@ -33,7 +33,7 @@ switch ($action) {
     case "install":
         $customer->open($id);
         echo "<h3>Installing customer $customer->name$</h3>";
-        $customer->install();
+        $customer->install($id);
         break;
 }
 

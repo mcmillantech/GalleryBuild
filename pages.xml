@@ -64,4 +64,8 @@
     <file>admin/voucherlist.php</file>
     <file>admin/vouchertlist.php</file>
     <file>admin/artgroup.php</file>
+    <file>admin/uploadRootImage.php</file>
+    <file>admin/rootImageFrame.html</file>
+    <file>admin/colImageFrame1.html</file>
+    <file>admin/colImageFrame2.html</file>
 </pageset>

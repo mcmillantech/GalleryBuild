@@ -101,10 +101,10 @@
                 <file>admin/adminmenus.php</file>
                 <action>replace admin/admingroupmenus.php</action>
             </page>
-            <page>
+<!--            <page>
                 <file>indexv.html</file>
                 <action>replace indexgroup.html</action>
-            </page>
+            </page> -->
         </changes>
     </option>
 

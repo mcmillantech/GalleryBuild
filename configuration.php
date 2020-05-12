@@ -64,11 +64,12 @@ class Configuration {
         $mysqli = dbConnect();
 
         $sql = "SELECT * FROM config WHERE id = $cusId";
+//    echo "$sql<br>";
         $result = $mysqli->query($sql)
                 or die("Error Config edit $sql");
         $record = $result->fetch_assoc();
 
-        $record['action'] = "configupdate";
+        $record['action'] = "configupdate&cus=$cusId";
 
         showView("config.html", $record);
     }
@@ -150,11 +151,11 @@ class Configuration {
     // Fetch the condiguration record
     // 
     // ----------------------------------------
-    function fetch()
+    function fetch($id)
     {
         $mysqli = dbConnect();
 
-	$sql = "SELECT * FROM config ";
+	$sql = "SELECT * FROM config WHERE id=$id ";
 	$result = $mysqli->query($sql)
 		or die("Failed to read record : " . $mysqli->error);
 	$record = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -186,9 +187,9 @@ class Configuration {
     // 
     // Common.php, config.txt, bootstrap.php
     // ----------------------------------------
-    function install($sourcePath)
+    function install($id, $sourcePath)
     {
-        $this->fetch();
+        $this->fetch($id);
         $this->makeCommon($sourcePath);
         $this->makeConfig();
         $this->makeBootstrap($sourcePath);
@@ -236,7 +237,6 @@ class Configuration {
     {
         
         $content = "dbhost\t\t$this->dbhost\n";
-        $content .= "dbhost\t\t$this->dbhost\n"; 
         $content .= "dbname\t\t$this->dbname\n";
         $content .= "dbuser\t\t$this->dbuser\n";
         $content .= "dbpw\t\t$this->dbpw\n";

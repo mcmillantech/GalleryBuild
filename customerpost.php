@@ -28,11 +28,11 @@ switch ($action) {
         $customer->update(1);
         break;
     case "configedit":
-        $cusId = 1;
+        $cusId = $_GET['cus'];
         $config->edit($cusId);
         break;
     case "configupdate":
-        $cusId = 1;
+        $cusId = $_GET['cus'];
         $config->update($cusId);
         break;
         

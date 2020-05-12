@@ -187,6 +187,16 @@ CREATE TABLE `text` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
+/*!40000 ALTER TABLE `text` DISABLE KEYS */;
+INSERT INTO `text` (`id`,`type`) VALUES 
+ (1,'hometext'),
+ (2,'abouttext'),
+ (3,'signupsubject'),
+ (4,'signuptext'),
+ (5,'signupprompt'),
+ (6,'homeimage'),
+ (7,'aboutimage');
+/*!40000 ALTER TABLE `text` ENABLE KEYS */;
 
 DROP TABLE IF EXISTS `userpages`;
 CREATE TABLE `userpages` (
