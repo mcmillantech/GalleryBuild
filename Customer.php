@@ -65,6 +65,10 @@ class Customer {
     public function bannerstyle() {
         return $this->bannerstyle;
     }
+    
+    public function bannerimage() {
+        return $this->bannerimage;
+    }
 
     public function menustyle() {
         return $this->menuStyle;
@@ -247,7 +251,7 @@ class Customer {
     // Run the installation for a customer
     // 
     // ----------------------------------------
-    public function install() {
+    public function install($id) {
         
         // Copy the custom style sheet
 //        if (!copy("source/css/$this->stylesheet", "build/custom.css"))
@@ -269,7 +273,7 @@ class Customer {
         
         $this->makeCustomStyle();
         $config = new Configuration;
-        $config->install($this->sourcePath);
+        $config->install($id, $this->sourcePath);
     }
     
     // ----------------------------------------
@@ -296,6 +300,9 @@ class Customer {
         $stream .= $bodyStyle;
 
  */
+        $stream .= "\n#bannerContent {\n";
+        $stream .= $this->bannerstyle;
+        $stream .= "\n}\n";
         $fout = "build/custom.css";
         $fh2 = fopen($fout, "w")
             or die ("Failed to create $fout`");
