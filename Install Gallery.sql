@@ -222,7 +222,7 @@ CREATE TABLE `users` (
   `username` varchar(16) default NULL,
   `password` varchar(16) NOT NULL,
   `firstname` varchar(16) default NULL,
-  `fullname` varchar(16) default NULL,
+  `fullname` varchar(45) default NULL,
   `email` varchar(45) default NULL,
   `addr1` varchar(45) default NULL,
   `addr2` varchar(45) default NULL,
@@ -231,6 +231,10 @@ CREATE TABLE `users` (
   `postcode` varchar(16) default NULL,
   `website` varchar(45) default NULL,
   `level` tinyint(3) unsigned default NULL,
+  `territory1` VARCHAR(16) DEFAULT 'UK',
+  `territory2` VARCHAR(16) DEFAULT 'EU',
+  `territory3` VARCHAR(16) DEFAULT 'USA',
+  `territory4` VARCHAR(16) DEFAULT 'Australia',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
