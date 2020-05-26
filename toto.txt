@@ -1,27 +1,47 @@
 To Do
 =====
+Take artists' fees: Full address, website, Instagram handle
+Shippingrate (paintings) set to 1 default. Change live table.
+picedit or piclist need collectionId - SELECT name FROM collections WHERE 
+ id=$_SESSION['artistId'] and set into coll1. (for opt 11) /
+Check posting of orders - correct user
+Collections.php to use id, not seq
+Agreement
+Image display height
+Personalised shipping text
+Edit artist bio /
+
+Done
+----
+Set Braintree test mode - is done in common.php /
+Text in upload popup /
+Message to say purchase not until June 1st /
+Braintree PCI /
+Disable payments /
+Check session start /
+Survey Monkey /
+One artist can't edit paintings /
+Lupe to be able to edit her paintings /
+
+Sequence of paintings /
+Better error message for link failure (Is artist name the same on user table?)
+FAQ /
+T&C /
+Image for about page
+Footer on home page
+Shipping grid by artist /
+Check Braintree /
+Random problems uploading /
+Extra shipping fields for users /
+2 columns for details in collections.php /
+CKEdit needed in coledit /
 Image upload error / - fixed with case of image file?
  Undefined index: artist in \www\GalleryBuild\build\admin\artgroup.php on line 39
  piclist.php:324
 
 Public home page - indexv needs the image from config / -
-Lupe wants hover image to change
-Allow upload of artist picture - to images, not small
-
-Check options list - have I done them all - see options.xml
-Payment option needed
-Topv.html option 5 reads "About Lupe"
-Use imgpath for all paths in admin
-Look into password encryption
-
-Builder
--------
-Need an option to rebuild config only
-Number of options to be a constant
-    OK in Customer.php
-
-Done
-----
+Lupe wants hover image to change /
+Allow upload of artist picture - to images, not small /
 Upload Braintree /
 Bug setting config in Builder / -
 Heading to read New art For You / - May need modifying later
@@ -35,3 +55,21 @@ Sort what I changed Wednesday with the top files / - all main menus set in topv.
 Database creation SQL - to GIT / -
 Customer post overwrites all config files / - 
 Admin has lost styles / -
+
+Gallery
+-------
+Check options list - have I done them all - see options.xml
+Shipping option not disabling admins
+Payment option needed
+Check option 4 - shipping - in config.xml
+Some functions in artgroup.php may be needed away from groups
+Topv.html option 5 reads "About Lupe"
+Use imgpath for all paths in admin
+Look into password encryption
+
+Builder
+-------
+Need an option to rebuild config only
+Number of options to be a constant
+    OK in Customer.php
+
