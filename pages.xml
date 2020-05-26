@@ -20,6 +20,7 @@
     <file>events.php</file>
     <file>footer.html</file>
     <file>imageframe.html</file>
+    <file>information.php</file>
     <file>index.php</file>
     <file>indexv.html</file>
     <file>order.php</file>
@@ -29,6 +30,11 @@
     <file>recent.html</file>
     <file>top2.php</file>
     <file>topv.html</file>
+<!-- pages for New Art -->
+    <file>register.php</file>
+    <file>join.php</file>
+    <file>join.html</file>
+<!-- -->
     <file>view.php</file>
     <file>admin/AjaxLogOn.php</file>
     <file>admin/DataEdit.php</file>
@@ -36,6 +42,8 @@
     <file>admin/logon.php</file>
     <file>admin/aboutedit.php</file>
     <file>admin/adminmenus.php</file>
+    <file>admin/bioedit.php</file>
+    <file>admin/biopost.php</file>
     <file>admin/coledit.php</file>
     <file>admin/collist.php</file>
     <file>admin/eventIImageFrame.html</file>
@@ -53,16 +61,19 @@
     <file>admin/piclist.php</file>
     <file>admin/shipedit.php</file>
     <file>admin/shiplist.php</file>
+    <file>admin/territories.php</file>
+    <file>admin/territorypost.php</file>
     <file>admin/textpost.php</file>
     <file>admin/upload.php</file>
     <file>admin/upload2.php</file>
     <file>admin/uploadImage.php</file>
     <file>admin/uploadImage2.php</file>
+    <file>admin/userlist.php</file>
+    <file>admin/useredit.php</file>
     <file>admin/uploadImageFrame.php</file>
     <file>admin/vieworder.php</file>
     <file>admin/voucheredit.php</file>
     <file>admin/voucherlist.php</file>
-    <file>admin/vouchertlist.php</file>
     <file>admin/artgroup.php</file>
     <file>admin/uploadRootImage.php</file>
     <file>admin/rootImageFrame.html</file>
