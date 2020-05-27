@@ -223,6 +223,7 @@ CREATE TABLE `users` (
   `password` varchar(16) NOT NULL,
   `firstname` varchar(16) default NULL,
   `fullname` varchar(45) default NULL,
+  `status` tinyint unsigned,
   `email` varchar(45) default NULL,
   `addr1` varchar(45) default NULL,
   `addr2` varchar(45) default NULL,
