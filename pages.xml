@@ -42,8 +42,6 @@
     <file>admin/logon.php</file>
     <file>admin/aboutedit.php</file>
     <file>admin/adminmenus.php</file>
-    <file>admin/bioedit.php</file>
-    <file>admin/biopost.php</file>
     <file>admin/coledit.php</file>
     <file>admin/collist.php</file>
     <file>admin/eventIImageFrame.html</file>
@@ -69,14 +67,19 @@
     <file>admin/uploadImage.php</file>
     <file>admin/uploadImage2.php</file>
     <file>admin/userlist.php</file>
-    <file>admin/useredit.php</file>
     <file>admin/uploadImageFrame.php</file>
     <file>admin/vieworder.php</file>
     <file>admin/voucheredit.php</file>
     <file>admin/voucherlist.php</file>
+
     <file>admin/artgroup.php</file>
-    <file>admin/uploadRootImage.php</file>
-    <file>admin/rootImageFrame.html</file>
+    <file>admin/artistfee.php</file>
+    <file>admin/artistpaid.php</file>
     <file>admin/colImageFrame1.html</file>
     <file>admin/colImageFrame2.html</file>
+    <file>admin/rootImageFrame.html</file>
+    <file>admin/bioedit.php</file>
+    <file>admin/biopost.php</file>
+    <file>admin/uploadRootImage.php</file>
+    <file>admin/useredit.php</file>
 </pageset>
