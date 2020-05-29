@@ -83,6 +83,7 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `ref` int(10) unsigned default NULL,
+  `user` tinyint(3) unsigned,
   `name` varchar(45) NOT NULL,
   `addr1` varchar(45) NOT NULL,
   `addr2` varchar(45) default NULL,
@@ -101,6 +102,7 @@ CREATE TABLE `orders` (
   `discounta` int(10) unsigned default NULL,
   `discounts` int(10) unsigned default NULL,
   `quantity` int(10) unsigned default NULL,
+  `transref` varchar(16) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
 
