@@ -144,7 +144,7 @@ echo "Set page options $param <br>";
         else
             $action = $actionString;
 
-//    echo "<br>Action $actionString, $action";
+//    echo "<br>$page Action $actionString, $action";
         switch ($action) {              // Action is file to remove or replace
             case "remove":
                 return;
