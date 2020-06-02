@@ -32,8 +32,9 @@ class Configuration {
 	private $brpublics;
 	private $brprivatep;
 	private $brprivates;
-
-    function initialise()
+        private $sandbox;
+        
+function initialise()
     {
 	$this->dbhost= '';
 	$this->dbname= '';
@@ -52,6 +53,7 @@ class Configuration {
 	$this->brpublics= '';
 	$this->brprivatep= '';
 	$this->brprivates= '';
+        $this->sandbox = 1;
     }
 
     // ----------------------------------------
@@ -105,7 +107,7 @@ class Configuration {
         $mysqli = dbConnect();
 
 	$dta = $_POST;
-        
+
 	$dbhost = addslashes($dta['dbhost']);
 	$dbname = addslashes($dta['dbname']);
 	$dbuser = addslashes($dta['dbuser']);
@@ -123,6 +125,13 @@ class Configuration {
 	$brpublics = addslashes($dta['brpublics']);
 	$brprivatep = addslashes($dta['brprivatep']);
 	$brprivates = addslashes($dta['brprivates']);
+//        $sandbox = $dta['cbsandbox'];
+        print_r($dta);
+        if (array_key_exists('cbsandbox', $dta))
+            $sandbox = 1;
+        else {
+            $sandbox = 0;
+        }
 	$sql = "UPDATE config SET "
 	 . "dbhost = '$dbhost',"
 	 . "dbname = '$dbname',"
@@ -140,7 +149,8 @@ class Configuration {
 	 . "brpublicp = '$brpublicp',"
 	 . "brpublics = '$brpublics',"
 	 . "brprivatep = '$brprivatep',"
-	 . "brprivates = '$brprivates'"
+	 . "brprivates = '$brprivates',"
+         . "sandbox = $sandbox"
 	 . " WHERE id=$cusId";
 
 	$mysqli->query($sql)
@@ -212,6 +222,9 @@ class Configuration {
             unlink ($outFile);
         $fhOut = fopen($outFile, "w");
         fwrite($fhOut, $stream);
+        
+//       $test = "const PP_TEST = 1;		// Set this to 1 to use sandbox\n\n";
+  //      fwrite ($fhOut, $test);
 
         $quot = '"';
         $str = "const WEBSITE = $quot$this->artweb$quot;\n";
@@ -284,6 +297,8 @@ class Configuration {
         fwrite ($fhOut, $str);
         $str = "\t\$privateKey = \"$this->brprivates\";\n"; 
         fwrite ($fhOut, $str);
+        $str = "\t\$token = 'sandbox_79k7qx4p_nymy4h8qq7ck73sn';\n";
+        fwrite ($fhOut, $str);
         $str = "\t\$environment = 'sandbox';\n";
         fwrite ($fhOut, $str);
 
@@ -296,6 +311,8 @@ class Configuration {
         $str = "\t\$publicKey = \"$this->brpublicp\";\n"; 
         fwrite ($fhOut, $str);
         $str = "\t\$privateKey = \"$this->brprivatep\";\n"; 
+        fwrite ($fhOut, $str);
+        $str = "\t\$token = 'production_38zqhm8t_fdyvvs3rm4gs2c5n';\n";
         fwrite ($fhOut, $str);
         $str = "\t\$environment = 'production';\n";
         fwrite ($fhOut, $str);

@@ -1,10 +1,10 @@
 To Do
 =====
-artlistpaid to set order status to 1, not 4
-Orders to show transref on list
-artgroup.php makedropDowns
-Test live purchase
-New lines in artist email
+artlistpaid to set order status to 1, not 4 /
+Orders to show transref on list /
+artgroup.php makedropDowns /?
+Test live purchase /
+New lines in artist email /
 Agreement
 Collections.php to use id, not seq
 piclist showForm is stll running on artist name
