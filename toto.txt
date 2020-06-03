@@ -1,72 +1,14 @@
 To Do
 =====
-artlistpaid to set order status to 1, not 4 /
-Orders to show transref on list /
-artgroup.php makedropDowns /?
-Test live purchase /
-New lines in artist email /
-Agreement
 Collections.php to use id, not seq
 piclist showForm is stll running on artist name
 Personalised shipping text
-
-Done
-----
-Sequence of paintings /
-Check posting of orders - correct user /
-Image display height /
-Shippingrate (paintings) set to 1 default. Change live table. /
-Edit artist bio /
-picedit or piclist need collectionId
-Set Braintree test mode - is done in common.php /
-Text in upload popup /
-Message to say purchase not until June 1st /
-Braintree PCI /
-Disable payments /
-Check session start /
-Survey Monkey /
-One artist can't edit paintings /
-Lupe to be able to edit her paintings /
-
-Sequence of paintings /
-Better error message for link failure (Is artist name the same on user table?)
-FAQ /
-T&C /
-Image for about page
-Footer on home page
-Shipping grid by artist /
-Check Braintree /
-Random problems uploading /
-Extra shipping fields for users /
-2 columns for details in collections.php /
-CKEdit needed in coledit /
-Image upload error / - fixed with case of image file?
- Undefined index: artist in \www\GalleryBuild\build\admin\artgroup.php on line 39
- piclist.php:324
-
-Public home page - indexv needs the image from config / -
-Lupe wants hover image to change /
-Allow upload of artist picture - to images, not small /
-Upload Braintree /
-Bug setting config in Builder / -
-Heading to read New art For You / - May need modifying later
-Align banner text on tablet / -
-Admin needs setting of home image / -
-Collection needs edit for artist details / - Already there
-    aboutedit.php to have image selection / -
-Sort the Braintree data / - in New Art condig (also Lupe folder)
-Store the creation SQL / In Build repo
-Sort what I changed Wednesday with the top files / - all main menus set in topv.html
-Database creation SQL - to GIT / -
-Customer post overwrites all config files / - 
-Admin has lost styles / -
 
 Gallery
 -------
 Check options list - have I done them all - see options.xml
 Shipping option not disabling admins
 Payment option needed
-Check option 4 - shipping - in config.xml
 Some functions in artgroup.php may be needed away from groups
 Topv.html option 5 reads "About Lupe"
 Use imgpath for all paths in admin
@@ -74,7 +16,11 @@ Look into password encryption
 
 Builder
 -------
-Need an option to rebuild config only
 Number of options to be a constant
     OK in Customer.php
+Don't copy Group files if not option 11
 
+Sandbox mode
+------------
+CommonMaster.php - set PP_TEST
+carddetails.php and artistfee - change token in Javascript 
