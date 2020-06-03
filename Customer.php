@@ -15,7 +15,7 @@ require_once "connect.php";
 require_once "PageBuilder.php";
 require_once "configuration.php";
 
-define ("N_OPTIONS", 10);
+define ("N_OPTIONS", 11);
 
 class Customer {
     public $name;
@@ -64,6 +64,10 @@ class Customer {
     
     public function bannerstyle() {
         return $this->bannerstyle;
+    }
+    
+    public function bannerimage() {
+        return $this->bannerimage;
     }
 
     public function menustyle() {
@@ -137,7 +141,6 @@ class Customer {
 //            echo "$fld = $op \n";
             $record [$fld] = $op;
         }
-
         $cusId = $record['id'];
         $record['configBtn'] = "<button onclick='config($cusId)'>Configuration</button>";
 
@@ -184,6 +187,7 @@ class Customer {
     // ----------------------------------------
     public function update($id) {
 //        print_r($_POST);
+        $id = $_GET['id'];
         $name = $_POST['name'];
         $addr1 = $_POST['addr1'];
         $addr2 = $_POST['addr2'];
@@ -231,7 +235,7 @@ class Customer {
 
     private function packOptions() {
         $string = "";
-        for ($i=1; $i<11; $i++) {
+        for ($i=1; $i<N_OPTIONS+1; $i++) {
             $key = "chopt" . $i;
             if (array_key_exists($key, $_POST)) {
                 $string .= '1';
@@ -239,6 +243,7 @@ class Customer {
                 $string .= '0';
             }
         }
+        echo "<br> $string ";
         return $string;
     }
 
@@ -246,7 +251,7 @@ class Customer {
     // Run the installation for a customer
     // 
     // ----------------------------------------
-    public function install() {
+    public function install($id) {
         
         // Copy the custom style sheet
 //        if (!copy("source/css/$this->stylesheet", "build/custom.css"))
@@ -268,7 +273,7 @@ class Customer {
         
         $this->makeCustomStyle();
         $config = new Configuration;
-        $config->install($this->sourcePath);
+        $config->install($id, $this->sourcePath);
     }
     
     // ----------------------------------------
@@ -280,16 +285,24 @@ class Customer {
     // ------------------------------------------
     private function makeCustomStyle()
     {
-        $styleFile = $this->sourcePath . "css/" . $this->menuStyle;
-        $fh = fopen($styleFile, "r")
-            or die ("Error style file $styleFile not found");
+//        if ($this->menuStyle == '')
+//            return;
+        $styleFile = $this->sourcePath . "css/" . $this->stylesheet;
+        if (!$fh = fopen($styleFile, "r"));
+        if ($fh === false)
+            die ("<br>Error style file $styleFile not found");
         $stream = fread($fh, filesize($styleFile));
         fclose($fh);
-        
+/*                  This to be developed later
         $bodyStyle = "\nbody\n{\n" 
             . $this->bodyStyle
             . "\n}\n";
         $stream .= $bodyStyle;
+
+ */
+        $stream .= "\n#bannerContent {\n";
+        $stream .= $this->bannerstyle;
+        $stream .= "\n}\n";
         $fout = "build/custom.css";
         $fh2 = fopen($fout, "w")
             or die ("Failed to create $fout`");

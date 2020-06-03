@@ -1,0 +1,26 @@
+To Do
+=====
+Collections.php to use id, not seq
+piclist showForm is stll running on artist name
+Personalised shipping text
+
+Gallery
+-------
+Check options list - have I done them all - see options.xml
+Shipping option not disabling admins
+Payment option needed
+Some functions in artgroup.php may be needed away from groups
+Topv.html option 5 reads "About Lupe"
+Use imgpath for all paths in admin
+Look into password encryption
+
+Builder
+-------
+Number of options to be a constant
+    OK in Customer.php
+Don't copy Group files if not option 11
+
+Sandbox mode
+------------
+CommonMaster.php - set PP_TEST
+carddetails.php and artistfee - change token in Javascript 

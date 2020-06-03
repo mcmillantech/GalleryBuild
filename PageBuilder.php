@@ -66,13 +66,13 @@ echo "Set page options $param <br>";
     // 
     // parameter    SimpleXML for the option
     // 
-    // Updates      changeAr - changes in option sequence
+    // Creates changeAr - changes in option sequence
     // ---------------------------------------------------------
     private function processOptionXML($option)
     {
         $id = (int)$option->id;         // Fetch the option id
                                         // Is this option to be used?
-        if ($this->checkOption($id) == 1)
+        if ($this->checkOption($id) == 0)
             return;                     // No - ignore it
 
         $changes = $option->changes;    // Drill into the options
@@ -90,6 +90,7 @@ echo "Set page options $param <br>";
                 array_push($this->changeAr, $ar);
             }
         }
+//        print_r($this->changeAr);
     }
 
     // ---------------------------------------------------------
@@ -113,7 +114,7 @@ echo "Set page options $param <br>";
             }
             $pageActions[$file] = $action;
         }
-
+//    print_r($pageActions);
         return $pageActions;
     }
 
@@ -133,23 +134,29 @@ echo "Set page options $param <br>";
     // ---------------------------------------------------------
     public function buildPage($page, $sourcePath) {
         $this->name = $page;
-  echo "\n<br>Build $page\n";
         
         $source = "Source/$page";           // Name the source and targets
-                                            // Checl for an entry in change set
-        $action = $this->checkForChanges($page);
-        switch ($action) {                  // Action is file to remove or replace
+                                            // Check for an entry in change set
+        $actionString = $this->checkForChanges($page);
+                    // Replace command has a tail - remove it from the command
+        if (substr($actionString, 0, 7) == "replace")
+            $action = "replace";
+        else
+            $action = $actionString;
+
+//    echo "<br>$page Action $actionString, $action";
+        switch ($action) {              // Action is file to remove or replace
             case "remove":
-  echo "Remove ";
                 return;
-            case "":
+            case "":                    // Default, just copy file
                 $source = "$page";
                 break;
-            default :
-                $source = $this->getReplaceName($action);
-                echo " Replace with $source ";
+            case "replace":
+                $source = $this->getReplaceName($actionString);
+                echo "<br>$page Replace with $source \n";
                 break;
         }
+//        echo " $source ";
                                         // Now $source is the file to process
         $target = "build/$page";
         $this->buildPageOn($source, $target, $sourcePath); // ... process and copy
@@ -180,7 +187,7 @@ echo "Set page options $param <br>";
     private function buildPageOn($src, $target, $sourcePath)
     {
         $source = $sourcePath . $src;
-//        echo "<br>Source $source\n";
+        //echo "<br>Source $source\n";
     
         $ar = explode('.', $src);            // Get file type
         if (count($ar) < 2) {                   // Probably a directory
@@ -191,8 +198,8 @@ echo "Set page options $param <br>";
                                         // Open source file and create target
         $sFile = @fopen($source, 'r');
         if ($sFile === FALSE) {
-            echo "Error $source not found<br>";
-            return;
+            echo "<br>Error buildPageOn $src, $sourcePath $source not found<br>";
+            return FALSE;
         }
                                         // Read the source file
         $inStream = fread($sFile, filesize($source));
@@ -211,7 +218,7 @@ echo "Set page options $param <br>";
                 $prefix = '<!--# ';
                 break;
             default :                       // Just copy JS and CSS files
-                echo "Other type $source";
+                echo "Other type $source <br>";
                 fwrite ($tFile, $inStream);
                 fclose($tFile);
                 return;
@@ -260,7 +267,11 @@ echo "Set page options $param <br>";
             return $stream;
         }
 
-        $content = $this->customer->bannercontent();
+        $image = '{impath}/' . $this->customer->bannerimage();
+        $content = "<img src='$image' style='width:100%; height:300px'>";
+        $content .= "<div id='bannerContent'>";
+        $content .= $this->customer->bannercontent();
+        $content .= "</div>";
 
         return str_replace($BANNER, $content, $stream);
     }
